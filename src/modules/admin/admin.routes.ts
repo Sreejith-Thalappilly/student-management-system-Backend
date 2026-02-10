@@ -102,4 +102,132 @@ router.post("/students", authenticate, authorizeAdmin, controller.addStudent);
  */
 router.post("/tasks", authenticate, authorizeAdmin, controller.addTask);
 
+/**
+ * @swagger
+ * /api/v1/admin/admins:
+ *   get:
+ *     summary: Get all admins
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of admins
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   name:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
+ */
+router.get(
+  "/admins",
+  authenticate,
+  authorizeAdmin,
+  controller.getAdmins
+);
+
+
+/**
+ * @swagger
+ * /api/v1/admin/students:
+ *   get:
+ *     summary: Get all students
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of students
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   name:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   department:
+ *                     type: string
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
+ */
+router.get(
+  "/students",
+  authenticate,
+  authorizeAdmin,
+  controller.getStudents
+);
+
+
+/**
+ * @swagger
+ * /api/v1/admin/tasks:
+ *   get:
+ *     summary: Get all tasks
+ *     tags: [Admin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of tasks with student details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   title:
+ *                     type: string
+ *                   description:
+ *                     type: string
+ *                   studentId:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                       name:
+ *                         type: string
+ *                       email:
+ *                         type: string
+ *                   dueDate:
+ *                     type: string
+ *                     format: date-time
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ */
+router.get(
+  "/tasks",
+  authenticate,
+  authorizeAdmin,
+  controller.getTasks
+);
+
+
 export default router;

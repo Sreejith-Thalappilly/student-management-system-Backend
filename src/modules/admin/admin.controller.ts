@@ -22,3 +22,18 @@ export const addTask = async (req: Request, res: Response) => {
   const task = await adminService.assignTask(req.body);
   res.status(201).json(task);
 };
+
+export const getAdmins = async (_req: Request, res: Response) => {
+  const admins = await adminService.listAdmins();
+  res.json(admins);
+};
+
+export const getStudents = async (_req: Request, res: Response) => {
+  const students = await adminService.listStudents();
+  res.json(students);
+};
+
+export const getTasks = async (_req: Request, res: Response) => {
+  const tasks = await adminService.listTasks();
+  res.json(tasks);
+};
