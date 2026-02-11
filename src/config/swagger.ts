@@ -11,7 +11,11 @@ const swaggerOptions = {
     servers: [
       {
         url: "http://localhost:5000",
-        description: "Local server",
+        description: "Local server"
+      },
+      {
+        url: "https://student-management-system-backend-code-tp4p.onrender.com",
+        description: "Production server"
       },
     ],
     components: {
