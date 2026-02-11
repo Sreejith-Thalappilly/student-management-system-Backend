@@ -8,16 +8,16 @@ const swaggerOptions = {
       version: "1.0.0",
       description: "API documentation for Student Management System",
     },
-    servers: [
-      {
-        url: "http://localhost:5000",
-        description: "Local server"
-      },
-      {
-        url: "https://student-management-system-backend-code-tp4p.onrender.com",
-        description: "Production server"
-      },
-    ],
+ servers: [
+  {
+    url: "https://student-management-system-backend-code-tp4p.onrender.com",
+    description: "Production server"
+  },
+  {
+    url: "http://localhost:5000",
+    description: "Local server"
+  }
+],
     components: {
       securitySchemes: {
         BearerAuth: {
