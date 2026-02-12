@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import * as adminService from "./admin.service";
+import { hashPassword } from "../../utils/password.util";
+import Admin from "../../models/admin.model";
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -36,4 +38,33 @@ export const getStudents = async (_req: Request, res: Response) => {
 export const getTasks = async (_req: Request, res: Response) => {
   const tasks = await adminService.listTasks();
   res.json(tasks);
+};
+
+
+export const createAdmin = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    // Check if admin already exists
+    const existingAdmin = await Admin.findOne({ email });
+    if (existingAdmin) {
+      return res.status(400).json({ message: "Admin already exists" });
+    }
+
+    // Hash password
+    const hashedPassword = await hashPassword(password);
+
+    // Create admin
+    const admin = await Admin.create({
+      email,
+      password: hashedPassword,
+    });
+
+    res.status(201).json({
+      message: "Admin created successfully",
+      adminId: admin._id,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
 };

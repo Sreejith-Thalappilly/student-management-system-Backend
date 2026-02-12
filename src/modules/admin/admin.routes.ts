@@ -3,6 +3,7 @@ import * as controller from "./admin.controller";
 import { authenticate } from "../../middlewares/auth.middleware";
 import { authorizeAdmin } from "../../middlewares/role.middleware";
 
+
 const router = Router();
 
 /**
@@ -229,5 +230,27 @@ router.get(
   controller.getTasks
 );
 
+/**
+ * @swagger
+ * /api/v1/admin/create:
+ *   post:
+ *     summary: Create a new admin
+ *     tags: [Admin]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Admin created successfully
+ */
+router.post("/createadmin", controller.createAdmin);
 
 export default router;

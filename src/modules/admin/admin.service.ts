@@ -44,3 +44,8 @@ export const listTasks = async () => {
   .populate("studentId", "name email department")
     .sort({ createdAt: -1 });
 };
+
+export const createAdmin = async (data: any) => {
+  data.password = await hashPassword(data.password);
+  return Admin.create(data);
+};
