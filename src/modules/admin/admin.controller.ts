@@ -43,28 +43,9 @@ export const getTasks = async (_req: Request, res: Response) => {
 
 export const createAdmin = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
-
-    // Check if admin already exists
-    const existingAdmin = await Admin.findOne({ email });
-    if (existingAdmin) {
-      return res.status(400).json({ message: "Admin already exists" });
-    }
-
-    // Hash password
-    const hashedPassword = await hashPassword(password);
-
-    // Create admin
-    const admin = await Admin.create({
-      email,
-      password: hashedPassword,
-    });
-
-    res.status(201).json({
-      message: "Admin created successfully",
-      adminId: admin._id,
-    });
-  } catch (error) {
-    res.status(500).json({ message: "Server error", error });
+    const admin = await adminService.createAdmin(req.body);
+    res.status(201).json(admin);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 };

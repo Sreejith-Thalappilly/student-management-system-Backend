@@ -232,7 +232,7 @@ router.get(
 
 /**
  * @swagger
- * /api/v1/admin/create:
+ * /api/v1/admin/createadmin:
  *   post:
  *     summary: Create a new admin
  *     tags: [Admin]
